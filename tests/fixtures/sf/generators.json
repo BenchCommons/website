@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "generators": [
+    { "id": "a", "name": "Alpha", "language": "TypeScript", "runtime": "Node.js 24.21.0", "category": "framework",
+      "homepage": "https://a.example", "repository": "https://github.com/x/a", "license": "MIT", "version": "1.0.0" },
+    { "id": "b", "name": "Beta", "language": "Clojure", "runtime": "JVM (Temurin 21)", "category": "blog",
+      "homepage": "https://b.example", "repository": "https://github.com/x/b", "license": "EPL-1.0", "version": "2.0.0" }
+  ]
+}
