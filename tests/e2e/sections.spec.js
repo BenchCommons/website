@@ -40,3 +40,12 @@ test('a cell where nearly every generator failed still lists the failures', asyn
   await open(page, '#round=2026-10-11&suite=GG&cell=nf100000-cs50');
   await expect(page.locator('.failed')).toContainText('Did not complete');
 });
+
+test('the comparison keeps its table and tab focus when the suite changes', async ({ page }) => {
+  await open(page, '#section=rounds&round=2026-10-11&compare=2026-10-06');
+  const p = page.getByRole('tab', { name: /^P 50/ });
+  await p.focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(page.getByRole('tab', { name: /^M 1,000/ })).toBeFocused();
+  await expect(page.locator('main table tbody tr').first()).toContainText('×');
+});

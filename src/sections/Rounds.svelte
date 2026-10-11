@@ -11,11 +11,15 @@
   let other = $state(null);
   let error = $state(null);
 
+  // A derived primitive: the effect re-runs only when the compared round changes, not on every state change.
+  const compareId = $derived(ui.compare);
+
   $effect(() => {
-    const id = ui.compare;
+    const id = compareId;
+    if (other?.id === id) return;
     other = null;
     error = null;
-    if (id) loadRound(id).then((r) => ui.compare === id && (other = r)).catch((e) => (error = e.message));
+    if (id) loadRound(id).then((r) => compareId === id && (other = r)).catch((e) => (error = e.message));
   });
 
   const shared = $derived(other ? index.rounds.find((r) => r.id === ui.round).suites.filter((s) => other.suites[s]) : []);
