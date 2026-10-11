@@ -12,7 +12,7 @@
 
 {#if rows.length}
   <div class="failed">
-    <h3>Did not complete ({rows.length})</h3>
+    <h2 class="h3">Did not complete ({rows.length})</h2>
     {#each groups as [kind, list] (kind)}
       <div class="group">
         <span class="kind kind-{kind}" title={KIND_HELP[kind]}>{KIND_LABEL[kind] ?? kind}</span>

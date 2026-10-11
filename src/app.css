@@ -88,3 +88,4 @@ th[aria-sort="descending"]::after { content: " ▼"; }
 :root { --good: #0b7a3e; --avg: #a35200; --poor: #c62f2f; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --good: #4fd18b; --avg: #ffb65c; --poor: #ff8080; } }
 :root[data-theme="dark"] { --good: #4fd18b; --avg: #ffb65c; --poor: #ff8080; }
+.h3 { font-size: 16px; }
