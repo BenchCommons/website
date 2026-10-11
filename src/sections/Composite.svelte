@@ -17,7 +17,7 @@
 <p class="muted note">
   Rank and median of each generator in every cell of the round. Rows are ordered by the number of cells completed, then
   by how high they rank in those cells. There is no combined score: a generator that is fast on small sites and fails on
-  large ones is shown as exactly that. The status filter applies to single cells and is ignored here.
+  large ones is shown as exactly that.
 </p>
 
 <div class="table-wrap">
