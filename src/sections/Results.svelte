@@ -1,4 +1,5 @@
 <script>
+  import Composite from './Composite.svelte';
   import BarChart from '../components/BarChart.svelte';
   import DataTable from '../components/DataTable.svelte';
   import FailedList from '../components/FailedList.svelte';
@@ -7,7 +8,10 @@
   import { applyFilters, facets } from '../lib/filters.js';
   import { int, percent, seconds } from '../lib/format.js';
 
-  let { round, ui, suites, set, composite } = $props();
+  let { round, ui, suites, set } = $props();
+
+  const composite = $derived(ui.view === 'composite');
+  const everyone = $derived(Object.keys(round.generators).map((framework) => ({ framework })));
 
   let scale = $state('log');
 
@@ -54,11 +58,12 @@
 
   <div class="layout">
     <FilterPanel
-      facets={facets(composite ? Object.keys(g).map((framework) => ({ framework })) : all, g)}
+      facets={facets(composite ? everyone : all, g)}
       filters={ui.filters}
       onchange={(filters) => set({ filters })}
-      visible={composite ? applyFilters(Object.keys(g).map((framework) => ({ framework })), g, ui.filters).length : shown.length}
+      visible={composite ? applyFilters(everyone, g, { ...ui.filters, status: [] }).length : shown.length}
       total={composite ? Object.keys(g).length : all.length}
+      hide={composite ? ['status'] : []}
     />
 
     <div class="card body">
@@ -77,7 +82,7 @@
       </div>
 
       {#if ui.view === 'composite'}
-        {@render composite?.()}
+        <Composite {round} {suites} filters={ui.filters} />
       {:else if cell}
         <p class="muted cellinfo">
           {int(cell.numberOfFiles)} pages × {cell.contentSize} KB · {cell.ok.length} of {all.length} completed

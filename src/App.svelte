@@ -4,6 +4,7 @@
   import { decode, encode } from './lib/hash.js';
   import Environment from './sections/Environment.svelte';
   import Intro from './sections/Intro.svelte';
+  import Quality from './sections/Quality.svelte';
   import Results from './sections/Results.svelte';
 
   let index = $state(null);
@@ -70,6 +71,8 @@
       <Environment {round} {entry} {suites} />
     {:else if ui.section === 'results'}
       <Results {round} {ui} {suites} {set} />
+    {:else if ui.section === 'quality'}
+      <Quality {round} {ui} {set} />
     {:else}
       <p class="muted">This section is not built yet.</p>
     {/if}

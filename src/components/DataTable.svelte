@@ -1,6 +1,6 @@
 <script>
   // Sortable table. Columns: {key, label, value(row), format?(v,row), left?}. Empty values sort last.
-  let { columns, rows, sort: initial, caption } = $props();
+  let { columns, rows, sort: initial, caption, fullRow } = $props();
 
   let sort = $state(initial ?? { key: columns[0].key, dir: 1 });
 
@@ -42,12 +42,21 @@
     <tbody>
       {#each sorted as r, i (r.framework ?? i)}
         <tr>
+          {#if fullRow?.(r)}
+            <td class="l">{columns[0].format ? columns[0].format(columns[0].value(r), r) : columns[0].value(r)}</td>
+            <td class="l full" colspan={columns.length - 1}>{fullRow(r)}</td>
+          {:else}
           {#each columns as c (c.key)}
             {@const v = c.value(r)}
-            <td class:l={c.left}>{c.format ? c.format(v, r) : v ?? '—'}</td>
+            <td class:l={c.left}>{#if c.html}{@html c.format(v, r)}{:else}{c.format ? c.format(v, r) : v ?? '—'}{/if}</td>
           {/each}
+          {/if}
         </tr>
       {/each}
     </tbody>
   </table>
 </div>
+
+<style>
+  .full { color: var(--ink-3); white-space: normal; }
+</style>

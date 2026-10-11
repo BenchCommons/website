@@ -2,7 +2,7 @@
   // Filter groups (spec R-13). An empty selection means "all"; NONE selects nothing.
   import { KIND_LABEL } from '../lib/kinds.js';
 
-  let { facets, filters, onchange, visible, total } = $props();
+  let { facets, filters, onchange, visible, total, hide = [] } = $props();
 
   const NONE = '-';
   const GROUPS = [
@@ -31,7 +31,7 @@
 <details class="panel" bind:open>
   <summary>Filters <span class="count">{visible} of {total} generators</span></summary>
   <div class="groups">
-    {#each GROUPS as [k, title] (k)}
+    {#each GROUPS.filter(([k]) => !hide.includes(k)) as [k, title] (k)}
       <fieldset>
         <legend>{title}</legend>
         <div class="all">

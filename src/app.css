@@ -81,3 +81,10 @@ th[aria-sort="descending"]::after { content: " ▼"; }
 .kind-nonconformant, .kind-unsupported { background: var(--k-other); }
 .empty { padding: 24px; text-align: center; color: var(--ink-3); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.score { display: inline-block; min-width: 2.4em; text-align: center; font-weight: 700; border-radius: 999px; padding: 1px 6px; }
+.score-good { color: var(--good); background: color-mix(in srgb, var(--good) 14%, transparent); }
+.score-avg { color: var(--avg); background: color-mix(in srgb, var(--avg) 14%, transparent); }
+.score-poor { color: var(--poor); background: color-mix(in srgb, var(--poor) 14%, transparent); }
+:root { --good: #0b7a3e; --avg: #a35200; --poor: #c62f2f; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --good: #4fd18b; --avg: #ffb65c; --poor: #ff8080; } }
+:root[data-theme="dark"] { --good: #4fd18b; --avg: #ffb65c; --poor: #ff8080; }
