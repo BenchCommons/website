@@ -2,7 +2,7 @@
   import { encode } from '../lib/hash.js';
   import ThemeToggle from './ThemeToggle.svelte';
 
-  let { index, state, round, onround } = $props();
+  let { index, ui, round, onround } = $props();
 
   const ITEMS = [
     ['intro', 'Introduction'],
@@ -15,10 +15,10 @@
 
 <header class="top">
   <div class="bar">
-    <a class="brand" href={encode({ ...state, section: 'intro' }, round)}>Bench<span>Commons</span></a>
+    <a class="brand" href={encode({ ...ui, section: 'intro' }, round)}>Bench<span>Commons</span></a>
     <label class="round">
       <span class="visually-hidden">Round</span>
-      <select value={state.round} onchange={(e) => onround(e.currentTarget.value)}>
+      <select value={ui.round} onchange={(e) => onround(e.currentTarget.value)}>
         {#each index.rounds as r (r.id)}
           <option value={r.id}>Round {r.id}</option>
         {/each}
@@ -28,7 +28,7 @@
   </div>
   <nav aria-label="Sections">
     {#each ITEMS as [id, label] (id)}
-      <a href={encode({ ...state, section: id }, round)} aria-current={state.section === id ? 'page' : undefined}>{label}</a>
+      <a href={encode({ ...ui, section: id }, round)} aria-current={ui.section === id ? 'page' : undefined}>{label}</a>
     {/each}
   </nav>
 </header>
