@@ -6,6 +6,7 @@
   import Intro from './sections/Intro.svelte';
   import Quality from './sections/Quality.svelte';
   import Results from './sections/Results.svelte';
+  import Rounds from './sections/Rounds.svelte';
 
   let index = $state(null);
   let round = $state(null);
@@ -73,8 +74,8 @@
       <Results {round} {ui} {suites} {set} />
     {:else if ui.section === 'quality'}
       <Quality {round} {ui} {set} />
-    {:else}
-      <p class="muted">This section is not built yet.</p>
+    {:else if ui.section === 'rounds'}
+      <Rounds {index} {round} {ui} {set} />
     {/if}
   </main>
 {/if}
