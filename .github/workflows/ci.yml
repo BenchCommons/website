@@ -36,3 +36,4 @@ jobs:
             test-results
             .lighthouseci
           if-no-files-found: ignore
+          include-hidden-files: true
