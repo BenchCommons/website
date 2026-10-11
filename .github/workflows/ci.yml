@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      # Only the top-level submodules: BT's own nested ssg-frameworks submodule is not needed.
+      - uses: actions/checkout@v7
+        with:
+          submodules: true
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e
+        env:
+          CI: 'true'
+      - run: npm run lhci
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: reports
+          path: |
+            test-results
+            .lighthouseci
+          if-no-files-found: ignore
