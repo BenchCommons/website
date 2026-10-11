@@ -78,6 +78,15 @@ function buildEnvironment(results) {
   };
 }
 
+function protocolOf(r) {
+  if (!r) return null;
+  const p = r.protocol || {};
+  return {
+    runs: r.suite?.runs ?? null, timeoutSeconds: p.timeoutSeconds ?? null, cooldownSeconds: p.cooldownSeconds ?? null,
+    warmupBuilds: p.warmupBuilds ?? null, cvThreshold: p.cvThreshold ?? null,
+  };
+}
+
 /** The round file of spec R-4 and the plan's data contract. */
 export function buildRound(roundDir, meta) {
   const suites = SUITES.filter((s) => existsSync(join(roundDir, s, 'suite-summary.csv')));
@@ -89,13 +98,18 @@ export function buildRound(roundDir, meta) {
     const ids = [...new Set(rows[s].map((r) => r.cell))]
       .sort((a, b) => num(rows[s].find((r) => r.cell === a).contentSize) - num(rows[s].find((r) => r.cell === b).contentSize));
     const cells = ids.map((id) => buildCell(id, rows[s].filter((r) => r.cell === id), generators));
-    for (const id of ids) {
-      const p = join(roundDir, s, id, 'results.json');
-      if (existsSync(p)) results.push(readJson(p));
-    }
-    out.suites[s] = { pages: cells[0]?.numberOfFiles ?? null, cells };
+    const suiteResults = ids.map((id) => join(roundDir, s, id, 'results.json')).filter(existsSync).map(readJson);
+    results.push(...suiteResults);
+    out.suites[s] = { pages: cells[0]?.numberOfFiles ?? null, protocol: protocolOf(suiteResults[0]), cells };
   }
-  for (const g of [...generators].sort()) out.generators[g] = metaFor(meta, g);
+  const versions = {};
+  for (const r of results) {
+    for (const [fw, g] of Object.entries(r.generators || {})) if (g?.version) versions[fw] ??= g.version;
+  }
+  for (const g of [...generators].sort()) {
+    const m = metaFor(meta, g);
+    out.generators[g] = { ...m, version: versions[g] ?? m.version };
+  }
   out.environment = buildEnvironment(results);
   const withQuality = results.find((r) => r.quality && Object.keys(r.quality).length);
   out.quality = withQuality ? qualityRows(withQuality) : [];

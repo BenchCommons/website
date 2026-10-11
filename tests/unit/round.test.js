@@ -50,6 +50,15 @@ describe('buildRound', () => {
     expect(round.generators.c).toMatchObject({ name: 'c', language: 'unknown' });
   });
 
+  it('uses the version the round ran over the current SF version', () => {
+    expect(round.generators.a.version).toBe('0.9.0');
+    expect(round.generators.b.version).toBe('2.0.0');
+  });
+
+  it('records the timing protocol of each suite', () => {
+    expect(round.suites.P.protocol).toEqual({ runs: 5, timeoutSeconds: 3600, cooldownSeconds: 15, warmupBuilds: 1, cvThreshold: 0.1 });
+  });
+
   it('builds the environment with fingerprints and cpu models', () => {
     expect(round.environment).toEqual({
       runner: 'GitHub Actions ubuntu-24.04, one runner per generator', cpus: 4, memoryBytes: 8589934592,
