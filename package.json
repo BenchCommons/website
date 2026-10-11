@@ -1,0 +1,28 @@
+{
+  "name": "benchcommons-website",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "data": "node scripts/build-data.mjs data/benchmark-tool data/ssg-frameworks public/data",
+    "dev": "npm run data && vite",
+    "build": "npm run data && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "lhci": "lhci autorun"
+  },
+  "dependencies": {
+    "d3-dsv": "3.0.1"
+  },
+  "devDependencies": {
+    "@lhci/cli": "0.15.1",
+    "@playwright/test": "1.64.0",
+    "@sveltejs/vite-plugin-svelte": "7.3.1",
+    "svelte": "5.57.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.3",
+    "wrangler": "4.149.0"
+  }
+}

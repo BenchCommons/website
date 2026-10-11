@@ -1,0 +1,6 @@
+[submodule "data/benchmark-tool"]
+	path = data/benchmark-tool
+	url = https://github.com/BenchCommons/benchmark-tool
+[submodule "data/ssg-frameworks"]
+	path = data/ssg-frameworks
+	url = https://github.com/BenchCommons/ssg-frameworks
