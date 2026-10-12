@@ -7,8 +7,8 @@ Site: publishes BenchCommons benchmark results. It currently shows SSGBerk; supp
 
 ## Stack and commands
 - Svelte 5 with Vite. Node >= 24. Tests: Vitest, Playwright and Lighthouse CI. Deployed to Cloudflare Workers as static assets.
-- Data comes from git submodules in `data/`, namely benchmark-tool results and catalog-ssg `generators.json`. `scripts/build-data.mjs` writes `public/data/*.json`.
+- Data comes from git submodules in `data/`, namely tools-benchmark results and catalog-ssg `generators.json`. `scripts/build-data.mjs` writes `public/data/*.json`.
 
 ## Rules
-- Consume the results format owned by benchmark-tool. Do not invent ad-hoc data files.
+- Consume the results format owned by tools-benchmark. Do not invent ad-hoc data files.
 - A new round only appears after the data submodules are bumped.
