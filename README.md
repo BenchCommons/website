@@ -1,8 +1,8 @@
-# BenchCommons website
+# BenchCommons website-results
 
 The results website of the BenchCommons static site generator benchmarks: every round, suite and generator from
-[benchmark-tool](https://github.com/BenchCommons/benchmark-tool), with the generator metadata of
-[ssg-frameworks](https://github.com/BenchCommons/ssg-frameworks). Spec, plan and tasks:
+[tools-benchmark](https://github.com/BenchCommons/tools-benchmark), with the generator metadata of
+[catalog-ssg](https://github.com/BenchCommons/catalog-ssg). Spec, plan and tasks:
 [docs/specs/001-results-website](docs/specs/001-results-website/spec.md).
 
 It is a static Svelte app. At build time `scripts/build-data.mjs` reads the two repositories, pinned as git submodules
@@ -11,8 +11,8 @@ in `data/`, and writes `public/data/rounds.json` plus one JSON file per round. T
 ## Develop
 
 ```sh
-git clone --recurse-submodules https://github.com/BenchCommons/website
-cd website
+git clone --recurse-submodules https://github.com/BenchCommons/website-results
+cd website-results
 npm ci
 npm run dev          # build the data, then start Vite
 npm test             # unit tests (Vitest)
@@ -26,7 +26,7 @@ Every view is a link: the section, round, suite, cell, view and filters live in 
 
 ## Publish a new round
 
-A round appears once its result files are on benchmark-tool `main` under `docs/results/<YYYY-MM-DD>/`. Move the
+A round appears once its result files are on tools-benchmark `main` under `docs/results/<YYYY-MM-DD>/`. Move the
 submodule to that commit and open a pull request:
 
 ```sh
