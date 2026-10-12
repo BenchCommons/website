@@ -1,4 +1,4 @@
-# AGENTS.md — website
+# AGENTS.md — website-results
 
 Follow the org-wide rules in [BenchCommons/.github AGENTS.md](https://github.com/BenchCommons/.github/blob/main/AGENTS.md) and the decisions in [.product](https://github.com/BenchCommons/.product). This file only adds what is specific to this repo.
 

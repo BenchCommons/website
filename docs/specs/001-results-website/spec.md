@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-11
 - **Status:** draft
-- **Repo:** `BenchCommons/website`. Reads, but does not change, `BenchCommons/benchmark-tool` (BT) and `BenchCommons/ssg-frameworks` (SF).
+- **Repo:** `BenchCommons/website-results`. Reads, but does not change, `BenchCommons/tools-benchmark` (BT) and `BenchCommons/catalog-ssg` (SF).
 - **Related:** BT `008-benchmark-methodology` (suites, `results.json`, `suite-summary.csv`, fingerprints), BT `009-output-quality` (`quality` section, `quality-summary.csv`), SF `generators.json` (generator metadata).
 
 ## Context
